@@ -4,7 +4,11 @@ module.exports = {
   darkMode: false,
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'northern-air': '#A5C9CA',
+      },
+    },
   },
   plugins: [],
 }
