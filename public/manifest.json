@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "MedInfoSimplify",
+  "name": "MedInfoSimplify: Enhancing Drug Label Comprehension",
   "icons": [
     {
       "src": "favicon.ico",
