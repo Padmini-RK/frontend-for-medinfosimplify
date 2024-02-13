@@ -23,12 +23,14 @@ const authSlice = createSlice({
     token: localStorage.getItem('token') || null,
     status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
     error: null,
+    email: null
   },
   reducers: {
     logout: (state) => {
       localStorage.removeItem('token');
       state.user = null;
       state.token = null;
+      state.email = null;
     },
     clearAuthError: (state) => {
       state.error = null;
@@ -41,14 +43,16 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.user = action.payload.user;
+        state.user = action.payload.username;
         state.token = action.payload.token;
+        state.email = action.payload.email;
       })
       .addCase(login.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
         state.user = null;
         state.token = null;
+        state.email = null;
       });
   },
 });

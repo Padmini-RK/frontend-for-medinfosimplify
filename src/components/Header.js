@@ -8,7 +8,11 @@ const Header = () => {
   const popoverRef = useRef();
   const location = useLocation();
   const navigate = useNavigate();
-  const isAuthenticated = useSelector((state) => state.auth.token);
+  const { isAuthenticated, userName, email } = useSelector((state) => ({
+    isAuthenticated: state.auth.token,
+    userName: state.auth.user,
+    email: state.auth.email
+  }));
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,7 +43,7 @@ const Header = () => {
         {isAuthenticated && (
           <div className="relative">
             <button onClick={() => setShowPopover(!showPopover)} className="flex items-center focus:outline-none hover:underline ">
-              <span>Sundri fafu</span>
+              <span>{userName}</span>
               {/* Icon for dropdown */}
               <svg className="fill-current h-4 w-4 ml-2" viewBox="0 0 20 20">
                 {/* Replace with your dropdown icon */}
@@ -48,8 +52,8 @@ const Header = () => {
             {showPopover && (
               <div ref={popoverRef} className="absolute right-0 mt-2 w-48 bg-white rounded shadow-lg z-20">
                 <div className="px-4 py-2 text-sm text-lighter-shade">
-                  <div className="font-bold">Sundri fafu</div>
-                  <div>sundri.fafu@gmail.com</div>
+                  <div className="font-bold">{userName || 'Profile'}</div>
+                  <div>{email || 'email'}</div>
                 </div>
                 <div className="border-t border-lighter-shade"></div>
                 <button
