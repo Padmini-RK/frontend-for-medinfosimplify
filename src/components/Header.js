@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../store/authSlice'; // ensure this is correctly imported
+import { logout } from '../store/authSlice'; 
 
 const Header = () => {
   const [showPopover, setShowPopover] = useState(false);
@@ -16,7 +16,6 @@ const Header = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Event listener to close popover when clicked outside
     function handleClickOutside(event) {
       if (popoverRef.current && !popoverRef.current.contains(event.target)) {
         setShowPopover(false);
@@ -44,9 +43,7 @@ const Header = () => {
           <div className="relative">
             <button onClick={() => setShowPopover(!showPopover)} className="flex items-center focus:outline-none hover:underline ">
               <span>{userName}</span>
-              {/* Icon for dropdown */}
               <svg className="fill-current h-4 w-4 ml-2" viewBox="0 0 20 20">
-                {/* Replace with your dropdown icon */}
               </svg>
             </button>
             {showPopover && (
