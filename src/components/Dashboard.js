@@ -1,36 +1,41 @@
-import React, { useState, useCallback } from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { uploadImage, resetUploadState } from '../store/imageUploadSlice';
 import UploadArea from './UploadArea';
 import SummaryDisplay from './SummaryDisplay';
 import ActionButtons from './UploadActionButtons';
 
 const Dashboard = () => {
-  const [file, setFile] = useState(null);
-  const [processing, setProcessing] = useState(false);
-  const [uploadSuccess, setUploadSuccess] = useState(false);
-  const [uploadError, setUploadError] = useState('');
-  const [summaryText, setSummaryText] = useState('');
+  const [fileName, setFileName ] = useState('');
+  const dispatch = useDispatch();
+  // Extracting state properties from the upload slice
+  const { 
+    processing,
+    uploadSuccess,
+    uploadError,
+    summaryText 
+  } = useSelector((state) => state.upload);
 
-  const handleFileUpload = async (event) => {
-    const uploadedFile = event.target.files[0];
-    if (uploadedFile) {
-      setProcessing(true);
-      setFile(uploadedFile);
-      setTimeout(() => {
-        setProcessing(false);
-        setUploadSuccess(true);
-        // Mock summary text
-        setSummaryText("This is where the summary of the drug label would appear...");
-      }, 1500);
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setFileName(event.target.files[0].name);
+      dispatch(uploadImage(file)); // Dispatching the uploadFile action with the selected file
     }
   };
 
+  const handleClearFile = () => {
+    dispatch(resetUploadState());
+  }
+
   const handleDownload = () => {
-    // Logic to download the summary
+    // Implement the download logic or leave it for future implementation
   };
 
   const handleCopy = () => {
     if (summaryText) {
-      navigator.clipboard.writeText(summaryText);
+      navigator.clipboard.writeText(summaryText); // Copying the summary text to the clipboard
     }
   };
 
@@ -45,6 +50,15 @@ const Dashboard = () => {
         />
         {uploadSuccess && (
           <>
+            <div className="text-center my-4">
+              <p>Uploaded File: {fileName}</p>
+              <button
+                onClick={handleClearFile}
+                className="bg-pale-shade hover:bg-lighter-shade text-white font-bold py-2 px-4 rounded"
+              >
+                Clear File
+              </button>
+            </div>
             <SummaryDisplay summaryText={summaryText} />
             <ActionButtons onDownload={handleDownload} onCopy={handleCopy} />
           </>
