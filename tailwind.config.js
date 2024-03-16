@@ -12,6 +12,8 @@ module.exports = {
         'lighter-shade': '#3a5a7d',
         'pale-shade': '#6789a8',
         'very-pale-shade': '#d1ddeb',
+        'alodon-sea': '#0d0f4f',
+        'forest': '#0d4f2c'
 
       },
     },

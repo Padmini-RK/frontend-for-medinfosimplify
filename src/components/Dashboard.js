@@ -58,8 +58,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="bg-very-pale-shade min-h-screen">
-      <div className="container mx-auto p-40">
+    <div className="bg-very-pale-shade min-h-screen flex flex-col">
+      <div className="container mx-auto text-center p-8">
+        <h2 className="text-xl font-bold text-dark-shade mb-4">Upload Your Drug Label</h2>
         <UploadArea
           onFileUpload={handleFileUpload}
           processing={processing}
@@ -71,12 +72,12 @@ const Dashboard = () => {
           <>
             <div className="text-center my-4">
               {/* {imageURL && <img src={imageURL} alt="Uploaded" className="mx-auto" />} Display the uploaded image */}
-              <p>Uploaded File: {fileName}</p>
+              <p>Image uploaded: <strong> {fileName}</strong></p>
               <button
                 onClick={handleClearFile}
                 className="bg-pale-shade hover:bg-lighter-shade text-white font-bold py-2 px-4 rounded"
               >
-                Clear File
+                Clear Image
               </button>
             </div>
             <SummaryDisplay summaryText={summaryText} />

@@ -37,7 +37,7 @@ export const uploadSlice = createSlice({
             state.processing = false;
             state.uploadSuccess = true;
             state.uploadError = '';
-            state.summaryText = action.payload.message;
+            state.summaryText = action.payload.extractedText;
           })
           .addCase(uploadImage.rejected, (state, action) => {
             state.processing = false;

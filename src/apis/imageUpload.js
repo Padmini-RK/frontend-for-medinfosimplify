@@ -13,6 +13,7 @@ export const imageUploadAPI = async (file) => {
                     'Content-Type': 'multipart/form-data'
                 }
             });
+        console.log('apiResponse.data;', apiResponse.data.extractedText);
         return apiResponse.data;
     } catch(error) {
         console.error("Inside Image upload API err", error);

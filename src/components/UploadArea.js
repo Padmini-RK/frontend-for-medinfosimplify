@@ -10,12 +10,17 @@ const UploadArea = ({ onFileUpload, processing, uploadSuccess, uploadError, imag
   };
 
   return (
-    <div className="my-8 text-center">
-      <div className={`p-6 border-2 border-dashed rounded-md ${processing ? 'border-gray-300' : 'border-base-dark-blue'} cursor-pointer`}>
+    <div className="my-4 text-center">
+      <div className="mb-4">
+        <p className="text-dark-shade">Acceptable formats: .jpeg, .jpg, .png</p>
+        <p className="text-dark-shade">Only one image at a time can be uploaded</p>
+        <p className="text-dark-shade">Maximum file size: 1MB</p>
+      </div>
+      <div className={`p-6 bg-white border-2 border-dashed rounded-md ${processing ? 'border-gray-300' : 'border-base-dark-blue'} cursor-pointer`}>
         {!processing && !uploadSuccess && (
           <div>
-            <label htmlFor="file-upload" className="text-base-dark-blue mb-2 text-lighter-shade underline">
-              Click to upload
+            <label htmlFor="file-upload" className="text-alodon-sea hover:text-lighter-shade underline cursor-pointer transition-colors duration-300">
+             Browse to upload
             </label>
             <input
               id="file-upload"
@@ -30,7 +35,7 @@ const UploadArea = ({ onFileUpload, processing, uploadSuccess, uploadError, imag
       </div>
       {uploadSuccess && !uploadError && (
         <>
-          <p className="text-green-500 text-center mt-2">Upload successful!</p>
+          <p className="text-forest text-center mt-2">Upload successful!</p>
           {imageURL && (
             <img src={imageURL} alt="Uploaded" className="mx-auto mt-2 cursor-pointer" style={{ maxWidth: '1000px', maxHeight: '500px' }} onClick={handleImageClick} />
           )}
